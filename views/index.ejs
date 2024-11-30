@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>HOOPOE</title>
+  <link rel="stylesheet" href="/css/styles.css">
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/scrollreveal/4.0.9/scrollreveal.min.js"></script>
+</head>
+<body>
+  <!-- Header Section -->
+  <header>
+    <nav>
+      <a href="#home">Home</a>
+      <a href="#mission">Our Mission</a>
+      <a href="#platforms">Platforms</a>
+      <a href="#contact">Contact</a>
+    </nav>
+  </header>
+
+  <!-- Home Section -->
+  <section id="home" class="section">
+    <h1>Welcome to HOOPOE</h1>
+    <p>Innovating the Future with Robotics and Technology.</p>
+  </section>
+
+  <!-- Mission Section -->
+  <section id="mission" class="section">
+    <h2>Our Mission</h2>
+    <p>HOOPOE is dedicated to creating cutting-edge solutions to real-world challenges.</p>
+  </section>
+
+  <!-- Platforms Section -->
+  <section id="platforms" class="section">
+    <h2>Platforms</h2>
+    <p>Discover our state-of-the-art platforms designed to revolutionize industries.</p>
+  </section>
+
+  <!-- Contact Section -->
+  <section id="contact" class="section">
+    <h2>Contact Us</h2>
+    <form id="contact-form" method="POST" action="/contact">
+      <label for="name">Name:</label>
+      <input type="text" id="name" name="name" required>
+      <label for="email">Email:</label>
+      <input type="email" id="email" name="email" required>
+      <label for="message">Message:</label>
+      <textarea id="message" name="message" required></textarea>
+      <button type="submit">Send</button>
+    </form>
+
+    <!-- Popup Modal -->
+    <div id="popup" class="popup hidden">
+      <p id="popup-message"></p>
+      <button id="close-popup">Close</button>
+    </div>
+  </section>
+
+  <!-- Footer Section -->
+  <footer>
+    <p>© 2024 HOOPOE. All rights reserved.</p>
+  </footer>
+
+  <!-- JavaScript for Popup Handling -->
+  <script>
+    const form = document.getElementById("contact-form");
+    const popup = document.getElementById("popup");
+    const popupMessage = document.getElementById("popup-message");
+    const closePopup = document.getElementById("close-popup");
+  
+    form.addEventListener("submit", async (event) => {
+      event.preventDefault(); // Prevent default form submission behavior
+  
+      // Collect form data
+      const formData = new FormData(form);
+      const data = Object.fromEntries(formData.entries());
+  
+      try {
+        // Send form data to the server
+        const response = await fetch("/contact", {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify(data),
+        });
+  
+        // Check if the response is OK
+        if (response.ok) {
+          const result = await response.json();
+          popupMessage.textContent = "Thank you for contacting us!";
+          popup.classList.remove("hidden");
+        } else {
+          throw new Error("Failed to send the message");
+        }
+      } catch (error) {
+        console.error("Error:", error);
+        popupMessage.textContent = "Failed to send your message. Please try again later.";
+        popup.classList.remove("hidden");
+      }
+    });
+  
+    // Close the popup and instantly navigate to the top of the page
+    closePopup.addEventListener("click", () => {
+      popup.classList.add("hidden");
+      window.scrollTo(0, 0); // Instantly scroll to the top
+      window.location.hash = ""; // Clear any hash navigation
+    });
+  </script>
+  
+  <!-- CSS for Popup -->
+  <style>
+    .popup {
+      position: fixed;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      padding: 20px;
+      background-color: #fff;
+      box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+      z-index: 1000;
+      border-radius: 8px;
+    }
+
+    .popup.hidden {
+      display: none;
+    }
+
+    #popup button {
+      margin-top: 10px;
+    }
+  </style>
+</body>
+</html>
