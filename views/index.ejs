@@ -57,24 +57,29 @@
     </div>
   </section>
 
-  <!-- Contact Section -->
-  <section id="contact" class="section">
+  <section id="contact" class="section contact">
+    <!-- PNG Overlay -->
+    <div class="png-overlay"></div>
+
+    <!-- Content Block -->
     <div class="content">
-      <div class="text">
-        <h2>Contact Us</h2>
-        <form id="contact-form" method="POST" action="/contact">
-          <label for="name">Name:</label>
-          <input type="text" id="name" name="name" required>
-          <label for="email">Email:</label>
-          <input type="email" id="email" name="email" required>
-          <label for="message">Message:</label>
-          <textarea id="message" name="message" required></textarea>
-          <button type="submit">Send</button>
-        </form>
-      </div>
-      <img src="/images/Picture3.jpg" alt="Contact Us" class="section-image">
+        <div class="text">
+            <h2>Contact Us</h2>
+            <p>This is a test message to check if the contact section is styled correctly.</p>
+            <form id="contact-form" method="POST" action="/contact">
+                <label for="name">Name:</label>
+                <input type="text" id="name" name="name" required>
+                <label for="email">Email:</label>
+                <input type="email" id="email" name="email" required>
+                <label for="message">Message:</label>
+                <textarea id="message" name="message" required></textarea>
+                <button type="submit">Send</button>
+            </form>
+        </div>
     </div>
-  </section>
+</section>
+
+
 
   <!-- Popup Modal -->
   <div id="popup" class="popup hidden">

@@ -7,6 +7,15 @@ body {
   line-height: 1.6;
   background-color: #121212; /* Match the hero section */
   color: #f4f4f4; /* Light text for dark background */
+  height: 100%; /* Ensure full height for the page */
+  overflow-x: hidden; /* Prevent horizontal scrolling */
+}
+
+html {
+  margin: 0;
+  padding: 0;
+  height: 100%; /* Match body height */
+  overflow-x: hidden; /* Prevent horizontal scrolling */
 }
 
 header {
@@ -48,7 +57,11 @@ footer {
   text-align: center;
   padding: 100px 20px;
   position: relative;
-  min-height: 100vh;
+  height: 100vh; /* Full viewport height */
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  overflow: hidden; /* Ensure no overflow */
 }
 
 .hero-content {
@@ -86,14 +99,56 @@ footer {
   color: #f4f4f4; /* Light gray for the subtitle */
 }
 
-/* Two-Column Layout for Sections */
+/* Section Styling */
 .section {
   display: flex;
   flex-wrap: wrap;
   align-items: center;
   justify-content: center;
   padding: 4rem 2rem;
-  min-height: 90vh;
+  min-height: 100vh; /* Full viewport height for each section */
+  width: 100%; /* Prevent horizontal overflow */
+  margin: 0;
+  overflow-x: hidden; /* Prevent overflow issues */
+}
+
+.contact {
+  position: relative;
+  height: 100vh; /* Full height */
+  width: 100%;
+  background-color: #121212;
+  margin: 0;
+  overflow-x: hidden;
+}
+
+/* PNG Overlay Styling */
+.contact .png-overlay {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: url('/images/Picture4.png') no-repeat left center;
+  background-size: contain;
+  pointer-events: none;
+  z-index: 1;
+}
+
+.contact .content {
+  display: flex;
+  justify-content: flex-end; /* Align form to the right */
+  align-items: center; /* Center the form vertically */
+  position: relative;
+  z-index: 2;
+  padding: 4rem 2rem;
+  max-width: 1200px; /* Prevent excessive width */
+  margin: auto; /* Center the content container */
+}
+
+.contact .text {
+  max-width: 400px;
+  margin-right: 2rem; /* Add spacing from the right edge */
+  color: white;
 }
 
 .content {
@@ -116,7 +171,8 @@ footer {
   margin-bottom: 1rem;
 }
 
-.text p, .text ul {
+.text p,
+.text ul {
   font-size: 1.25rem;
   line-height: 1.8;
 }
@@ -157,20 +213,23 @@ form {
   display: flex;
   flex-direction: column;
   gap: 1rem;
-  background-color: #1c1c1c; /* Dark background for the form */
+  background-color: #1c1c1c;
   padding: 2rem;
   border-radius: 8px;
   box-shadow: 0 4px 6px rgba(0, 0, 0, 0.2);
 }
 
-form input, form textarea, form button {
+form input,
+form textarea,
+form button {
   padding: 0.5rem;
   width: 100%;
   max-width: 400px;
   font-size: 1rem;
 }
 
-form input, form textarea {
+form input,
+form textarea {
   background-color: #333;
   border: 1px solid #555;
   color: #fff;
@@ -178,7 +237,7 @@ form input, form textarea {
 }
 
 form button {
-  background-color: #00d4ff; /* Accent button color */
+  background-color: #00d4ff;
   color: #121212;
   border: none;
   cursor: pointer;
@@ -191,42 +250,15 @@ form button:hover {
   background-color: #00a7cc;
 }
 
-/* Popup Modal */
-.popup {
-  position: fixed;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
-  padding: 20px;
-  background-color: #fff;
-  color: #333;
-  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-  z-index: 1000;
-  border-radius: 8px;
-}
-
-.popup.hidden {
-  display: none;
-}
-
-#popup button {
-  margin-top: 10px;
-}
-
 /* Responsive Design */
 @media (max-width: 768px) {
-  .content {
+  .section {
     flex-direction: column;
     text-align: center;
   }
 
-  .section-image {
-    max-width: 90%;
-    margin-bottom: 1.5rem;
-  }
-
-  .text {
-    padding: 0;
+  .hero {
+    flex-direction: column;
   }
 
   .hero-logo {
@@ -239,6 +271,16 @@ form button:hover {
 
   .hero-subtitle {
     font-size: 1.25rem;
+  }
+
+  .contact .content {
+    justify-content: center; /* Center form for smaller screens */
+    align-items: flex-start;
+    padding: 2rem;
+  }
+
+  .contact .text {
+    margin: 0;
   }
 }
 
@@ -262,39 +304,8 @@ form button:hover {
   .text p {
     font-size: 1rem;
   }
-  /* Popup Modal */
-.popup {
-  position: fixed;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
-  padding: 20px;
-  background-color: #fff;
-  color: #333;
-  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-  z-index: 1000;
-  border-radius: 8px;
-  text-align: center;
-  max-width: 400px;
-}
 
-.popup.hidden {
-  display: none;
+  .contact .text {
+    max-width: 100%;
+  }
 }
-
-#popup button {
-  margin-top: 15px;
-  padding: 0.5rem 1rem;
-  background-color: #00d4ff;
-  border: none;
-  color: #fff;
-  font-weight: bold;
-  border-radius: 5px;
-  cursor: pointer;
-}
-
-#popup button:hover {
-  background-color: #00a7cc;
-}
-}
-
