@@ -80,11 +80,14 @@
 
 
 
-  <!-- Popup Modal -->
-  <div id="popup" class="popup hidden">
+<!-- Popup Modal -->
+<div id="popup" class="popup hidden">
+  <div class="popup-content">
     <p id="popup-message"></p>
     <button id="close-popup">Close</button>
   </div>
+</div>
+
 
   <!-- Footer Section -->
   <footer>
@@ -92,70 +95,67 @@
   </footer>
 
   <script>
-    // Smooth scrolling for navigation
-    document.querySelectorAll(".nav-link").forEach((link) => {
-      link.addEventListener("click", (event) => {
-        event.preventDefault();
-        const targetId = link.getAttribute("data-target");
-        const targetElement = document.getElementById(targetId);
+// Smooth scrolling for navigation
+document.querySelectorAll(".nav-link").forEach((link) => {
+  link.addEventListener("click", (event) => {
+    event.preventDefault();
+    const targetId = link.getAttribute("data-target");
+    const targetElement = document.getElementById(targetId);
 
-        if (targetElement) {
-          targetElement.scrollIntoView({ behavior: "smooth" });
-        }
-      });
-    });
-
-    // Form submission and popup handling
-    const form = document.getElementById("contact-form");
-    const popup = document.getElementById("popup");
-    const popupMessage = document.getElementById("popup-message");
-    const closePopup = document.getElementById("close-popup");
-
-    form.addEventListener("submit", async (event) => {
-      event.preventDefault();
-
-      const formData = new FormData(form);
-      const data = Object.fromEntries(formData.entries());
-
-      try {
-        const response = await fetch("/contact", {
-          method: "POST",
-          headers: {
-            "Content-Type": "application/json",
-          },
-          body: JSON.stringify(data),
-        });
-
-        if (response.ok) {
-          popupMessage.textContent = "Thank you for contacting us!";
-          popup.classList.remove("hidden");
-        } else {
-          throw new Error("Failed to send the message.");
-        }
-      } catch (error) {
-        console.error("Error:", error);
-        popupMessage.textContent = "Failed to send your message. Please try again later.";
-        popup.classList.remove("hidden");
-      }
-    });
-
-    closePopup.addEventListener("click", () => {
-  popup.classList.add("hidden");
-
-  // Smooth scroll to the top
-  window.scrollTo({
-    top: 0,
-    behavior: "smooth"
-  });
-
-  // Ensure the scroll is complete before refreshing
-  const checkScrollInterval = setInterval(() => {
-    if (window.scrollY === 0) {
-      clearInterval(checkScrollInterval);
-      location.reload(); // Refresh the page
+    if (targetElement) {
+      targetElement.scrollIntoView({ behavior: "smooth" });
     }
-  }, 50); // Check every 50ms
+  });
 });
+
+// Form submission and popup handling
+const form = document.getElementById("contact-form");
+const popup = document.getElementById("popup");
+const popupMessage = document.getElementById("popup-message");
+const closePopup = document.getElementById("close-popup");
+
+form.addEventListener("submit", async (event) => {
+  event.preventDefault();
+
+  const formData = new FormData(form);
+  const data = Object.fromEntries(formData.entries());
+
+  try {
+    const response = await fetch("/contact", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify(data),
+    });
+
+    if (response.ok) {
+      popupMessage.textContent = "Thank you for contacting us!";
+      popup.classList.add("visible"); // Show the popup
+    } else {
+      throw new Error("Failed to send the message.");
+    }
+  } catch (error) {
+    console.error("Error:", error);
+    popupMessage.textContent = "Failed to send your message. Please try again later.";
+    popup.classList.add("visible"); // Show the popup
+  }
+});
+
+// Close popup, smoothly scroll to the top, and clear the form
+closePopup.addEventListener("click", () => {
+  popup.classList.remove("visible"); // Hide the popup
+
+  // Smoothly scroll to the Home section
+  document.getElementById("home").scrollIntoView({ behavior: "smooth" });
+
+  // Clear the form after 300ms (to allow smooth scrolling to complete)
+  setTimeout(() => {
+    form.reset(); // Clear all form inputs
+  }, 300);
+});
+
+
 
 </script>
 
