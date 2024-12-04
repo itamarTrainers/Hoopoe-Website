@@ -158,6 +158,138 @@ footer {
   overflow-x: hidden; /* Prevent overflow issues */
 }
 
+/* Mission Section Styles */
+.section.mission {
+  padding: 4rem 2rem;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.mission .content {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  max-width: 1200px;
+  gap: 2rem; /* Space between text and image */
+  margin: auto;
+}
+
+.mission-image-container {
+  flex: 1;
+  max-width: 45%; /* Restrict image size */
+  display: flex;
+  justify-content: center;
+}
+
+.mission-image {
+  width: 100%;
+  height: auto;
+  border-radius: 10px; /* Smooth rounded corners */
+  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.2); /* Subtle shadow for depth */
+}
+
+.mission .text {
+  flex: 1;
+  max-width: 50%; /* Restrict text width */
+  text-align: left; /* Align text to the left */
+}
+
+.mission .mission-title {
+  font-size: 2.5rem;
+  font-weight: bold;
+  margin-bottom: 1rem;
+  color: #00d4ff; /* Highlighted title */
+}
+
+.mission .mission-description {
+  font-size: 1.2rem;
+  line-height: 1.8;
+  color: #dcdcdc; /* Softer text color for readability */
+}
+
+/* Responsive Adjustments */
+@media (max-width: 1024px) {
+  .mission .content {
+    flex-direction: column;
+    gap: 1.5rem; /* Reduce spacing for smaller screens */
+  }
+
+  .mission-image-container {
+    max-width: 100%; /* Full width for smaller screens */
+  }
+
+  .mission .text {
+    max-width: 100%;
+    text-align: center; /* Center-align text for smaller devices */
+  }
+
+  .mission .mission-title {
+    font-size: 2rem;
+  }
+
+  .mission .mission-description {
+    font-size: 1rem;
+  }
+}
+
+ /**/
+
+
+/* Platforms Section */
+.platforms {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 100vh; /* Full viewport height */
+  padding: 2rem;
+}
+
+.platforms .content {
+  display: flex;
+  flex-direction: row-reverse; /* Image on the right */
+  align-items: center; /* Align image with text block */
+  justify-content: space-between;
+  max-width: 1200px;
+  width: 100%;
+  gap: 2rem; /* Space between text and image */
+}
+
+.platforms .section-image {
+  flex: 1.5; /* Allocate more space for the image */
+  max-width: 50%; /* Maintain width */
+  height: 75vh; /* Keep the same height */
+  object-fit: cover; /* Maintain proportions */
+  border-radius: 10px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.4); /* Add a subtle shadow */
+}
+
+.platforms .text {
+  flex: 1;
+  max-width: 45%; /* Text takes a reasonable width */
+  text-align: left;
+  font-size: 1.25rem;
+  line-height: 1.8;
+}
+@media (max-width: 768px) {
+  .platforms .content {
+    flex-direction: column;
+    gap: 1.5rem;
+    text-align: center;
+  }
+
+  .platforms .section-image {
+    max-width: 100%; /* Full width on small screens */
+    align-self: center; /* Ensure proper alignment */
+    height: auto; /* Automatically adjust height */
+  }
+
+  .platforms .text {
+    max-width: 100%;
+    align-items: center; /* Center align the text block */
+  }
+}
+
 .contact {
   position: relative;
   height: 100vh; /* Full height */
